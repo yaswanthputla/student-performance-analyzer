@@ -93,3 +93,41 @@ def compute_subject_averages(scores: np.ndarray, subjects: list[str]) -> dict[st
     """
     column_averages = np.mean(scores, axis=0)
     return {subject: float(avg) for subject, avg in zip(subjects, column_averages)}
+
+
+
+def compute_student_averages(scores: np.ndarray, students: list[dict]) -> dict[str, float]:
+    """
+    Compute each student's average score across all their subjects.
+
+    Args:
+        scores: 2D array of shape (num_students, num_subjects).
+        students: original list of student dicts, in the same row
+                  order as `scores` (used to get each student's name).
+
+    Returns:
+        A dict mapping each student's name to their average score,
+        e.g. {"Rahul": 91.6, "Sneha": 78.0, ...}
+    """
+    row_averages = np.mean(scores, axis=1)
+    names = [student["name"] for student in students]
+    return {name: float(avg) for name, avg in zip(names, row_averages)}
+
+
+def find_top_student(scores: np.ndarray, students: list[dict]) -> tuple[str, float]:
+    """
+    Find the student with the highest average score.
+
+    Args:
+        scores: 2D array of shape (num_students, num_subjects).
+        students: original list of student dicts, in the same row
+                  order as `scores`.
+
+    Returns:
+        A tuple of (student_name, their_average_score).
+    """
+    row_averages = np.mean(scores, axis=1)
+    top_index = int(np.argmax(row_averages))
+    top_name = students[top_index]["name"]
+    top_average = float(row_averages[top_index])
+    return top_name, top_average
