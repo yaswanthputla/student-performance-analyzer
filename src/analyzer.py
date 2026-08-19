@@ -175,3 +175,16 @@ def get_pass_fail_status(average: float, passing_mark: float = 40.0) -> str:
         "Pass" if average >= passing_mark, otherwise "Fail".
     """
     return "Pass" if average >= passing_mark else "Fail"
+
+
+def count_students(students: list[dict]) -> int:
+    """
+    Count how many students are in the dataset.
+
+    Args:
+        students: list of student dicts.
+
+    Returns:
+        The number of students.
+    """
+    return len(students)
