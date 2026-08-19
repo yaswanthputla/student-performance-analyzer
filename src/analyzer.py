@@ -131,3 +131,47 @@ def find_top_student(scores: np.ndarray, students: list[dict]) -> tuple[str, flo
     top_name = students[top_index]["name"]
     top_average = float(row_averages[top_index])
     return top_name, top_average
+
+
+
+def get_letter_grade(average: float) -> str:
+    """
+    Convert a numeric average into a letter grade.
+
+    Grading scale:
+        90 and above -> A
+        75 to 89      -> B
+        60 to 74      -> C
+        40 to 59      -> D
+        below 40      -> F
+
+    Args:
+        average: a student's average score (0-100).
+
+    Returns:
+        A single-letter grade as a string.
+    """
+    if average >= 90:
+        return "A"
+    elif average >= 75:
+        return "B"
+    elif average >= 60:
+        return "C"
+    elif average >= 40:
+        return "D"
+    else:
+        return "F"
+
+
+def get_pass_fail_status(average: float, passing_mark: float = 40.0) -> str:
+    """
+    Determine whether a student passes or fails based on their average.
+
+    Args:
+        average: a student's average score (0-100).
+        passing_mark: minimum average required to pass. Defaults to 40.0.
+
+    Returns:
+        "Pass" if average >= passing_mark, otherwise "Fail".
+    """
+    return "Pass" if average >= passing_mark else "Fail"
